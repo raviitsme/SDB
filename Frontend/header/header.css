@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Header Styles */
+.top-header {
+  width: 100%;
+  height: 70px; /* fixed height for perfect centering */
+  background: linear-gradient(135deg, #111827, #1f2937);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;          /* flexbox for centering */
+  justify-content: center; /* horizontal center */
+  align-items: center;     /* vertical center */
+
+  margin: 0;
+  padding: 0;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.site-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0; /* remove default h1 margin */
+  text-align: center;
+}

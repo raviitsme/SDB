@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Dashboard</title>
+
+    <!-- Icons & Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300..700&display=swap" rel="stylesheet">
+
+    <!-- Same CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- TOP HEADER -->
+    <header class="top-header">
+        <h1 class="site-title">School Management System</h1>
+    </header>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2 class="logo">Employee Panel</h2>
+
+        <ul class="menu">
+            <li class="active" data-page="dashboard">
+                <i class="fa-solid fa-chart-line"></i> Dashboard
+            </li>
+            <li data-page="profile">
+                <i class="fa-solid fa-user"></i> My Profile
+            </li>
+            <li data-page="subjects">
+                <i class="fa-solid fa-book"></i> Subjects
+            </li>
+            <li data-page="attendance">
+                <i class="fa-solid fa-calendar-check"></i> Attendance
+            </li>
+            <li data-page="students">
+                <i class="fa-solid fa-users"></i> My Students
+            </li>
+            <li data-page="notifications">
+                <i class="fa-solid fa-bell"></i> Notifications
+            </li>
+            <li onclick="logout()">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </li>
+        </ul>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+
+        <header class="topbar">
+            <h3 id="pageTitle">Dashboard</h3>
+            <span id="greet"></span>
+        </header>
+
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="page active">
+            <div class="cards">
+                <div class="card">
+                    <h4>Total Subjects</h4>
+                    <p>4</p>
+                </div>
+                <div class="card">
+                    <h4>Total Students</h4>
+                    <p>120</p>
+                </div>
+                <div class="card">
+                    <h4>Today Classes</h4>
+                    <p>3</p>
+                </div>
+                <div class="card">
+                    <h4>Notifications</h4>
+                    <p>2</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFILE -->
+        <section id="profile" class="page">
+            <div class="table-box">
+                <h3>My Profile</h3>
+                <table>
+                    <tbody id="myProfileBody">
+                        <tr>
+                            <th>Name</th>
+                            <td id="emp_name" class="failed"></td>
+                        </tr>
+                        <tr>
+                            <th>Employee ID</th>
+                            <td id="emp_id" class="failed"></td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td id="emp_email" class="failed"></td>
+                        </tr>
+                        <tr>
+                            <th>Phone</th>
+                            <td id="emp_phone" class="failed"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SUBJECTS -->
+        <section id="subjects" class="page">
+            <div class="table-box">
+                <h3>Assigned Subjects</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Class</th>
+                            <th>Schedule</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Data Structures</td>
+                            <td>BCA 2nd Sem</td>
+                            <td>Mon - Wed</td>
+                        </tr>
+                        <tr>
+                            <td>DBMS</td>
+                            <td>BCA 3rd Sem</td>
+                            <td>Tue - Thu</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ATTENDANCE -->
+        <section id="attendance" class="page">
+            <div class="table-box">
+                <h3>Today's Attendance</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Present</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>BCA 2nd Sem</td>
+                            <td>28</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>BCA 3rd Sem</td>
+                            <td>25</td>
+                            <td>30</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- STUDENTS -->
+        <div id="addStudentModal" class="modal">
+            <div class="modal-content">
+
+                <h3 class="modal-title">Add New Student</h3>
+
+                <div class="input-group">
+                    <input type="text" id="studentID" required>
+                    <label>Student ID</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="studentName" required>
+                    <label>Student Name</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="studentPhone" required>
+                    <label>Phone number</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="email" id="studentEmail" required>
+                    <label>Email</label>
+                </div>
+
+                <div class="input-group select-group">
+                    <select id="studentClass" required>
+                        <option value="SelectClass">Select Class</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn-cancel" onclick="closeAddStudent()">Cancel</button>
+                    <button class="btn-primary" onclick="addStudent()">Add Student</button>
+                </div>
+
+            </div>
+        </div>
+
+        <section id="students" class="page">
+            <div class="table-box">
+                <h3>Students List</h3>
+                <button class="addUser" id="add-std"><i class="fa-solid fa-user-plus"></i>Add
+                    Student</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Class</th>
+                            <th>Student ID</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody id="myStudentsBody">
+                        <tr>
+                            <td colspan="5">Fetching students...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- NOTIFICATIONS -->
+        <section id="notifications" class="page">
+            <div class="table-box">
+                <h3>Notifications</h3>
+                <p>No new notifications.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JS -->
+    <script src="../footer/footer.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

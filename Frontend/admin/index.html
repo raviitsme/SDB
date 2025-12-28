@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+        <!-- NEW TOP HEADER -->
+        <header class="top-header">
+            <h1 class="site-title">School Management System</h1>
+        </header>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <h2 class="logo">Admin Panel</h2>
+
+            <ul class="menu">
+                <li class="active" data-page="dashboard"><i class="fa-solid fa-chart-line"></i> Dashboard</li>
+                <li data-page="admins"><i class="fa-solid fa-user-shield"></i> Admins</li>
+                <!-- <li data-page="superUser"><i class="fa-solid fa-user-tie"></i> Super User</li> -->
+                <li data-page="teachers"><i class="fa-solid fa-chalkboard-teacher"></i> Teachers</li>
+                <li data-page="students"><i class="fa-solid fa-user-graduate"></i> Students</li>
+                <li data-page="notifications"><i class="fa-solid fa-bell"></i> Notifications</li>
+                <li onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</li>
+            </ul>
+        </aside>
+
+        <!-- MAIN -->
+        <div class="main">
+            <header class="topbar">
+                <h3 id="pageTitle">Dashboard</h3>
+                <span>Welcome, Admin.</span>
+            </header>
+
+            <!-- DASHBOARD -->
+            <section id="dashboard" class="page active">
+                <div class="cards">
+                    <div class="card">
+                        <h4>Total Admins</h4>
+                        <p id="totalAdmins">0</p>
+                    </div>
+                    <div class="card">
+                        <h4>Total Employees</h4>
+                        <p id="totalEmployees">0</p>
+                    </div>
+                    <div class="card">
+                        <h4>Total Students</h4>
+                        <p id="totalStudents">0</p>
+                    </div>
+                    <div class="card">
+                        <h4>Notifications</h4>
+                        <p id="totalNotifications">0</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ADMINS -->
+            <section id="admins" class="page">
+                <div class="table-box">
+                    <h3>Admins List</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminsTableBody">
+                            <tr>
+                                <td colspan="4">Loading admins...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <!-- SUPER USERS -->
+            <!-- <section id="superUser" class="page active">
+            <div class="table-box">
+                <h3>Super User(s) list</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </section> -->
+
+            <!-- TEACHERS -->
+            <section id="teachers" class="page">
+                <div class="table-box">
+                    <h3>Teachers List</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Employee ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="teachersTableBody">
+                            <tr>
+                                <td colspan="5">Loading Teachers...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- STUDENTS -->
+            <section id="students" class="page">
+                <div class="table-box">
+                    <h3>Students List</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="studentsTableBody">
+                            <tr>
+                                <td colspan="5">Loading students...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- NOTIFICATIONS -->
+            <section id="notifications" class="page">
+                <h3>Notifications</h3>
+                <p>No new notifications</p>
+            </section>
+
+        </div>
+        <script src="../footer/footer.js"></script>
+        <script src="script.js"></script>
+    </body>
+
+</html>

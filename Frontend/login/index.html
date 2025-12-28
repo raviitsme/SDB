@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management Database System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <h1>School Database Management System</h1>
+    <canvas id="particlesCanvas"></canvas>
+    <div id="container">
+        <form class="login-form" id="loginForm">
+            <h1>Login</h1>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-eye"></i>
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit">Log In</button>
+            <p class="form-link">
+                Don't have an account?
+                <a href="../register/index.html">Register here</a>
+            </p>
+            <p class="form-link">
+                Forgot Password?
+                <a href="#" onclick="openForgot()">Click here</a>
+            </p>
+        </form>
+        <div id="forgotContainer" class="forgot-container">
+            <div class="forgot-box">
+                <h3 id="forgotTitle">Forgot Password</h3>
+
+                <div id="stepUser-Id">
+                    <input type="text" id="forgotEmail" placeholder="Enter User ID">
+                    <button onclick="sendOTP()">Send OTP</button>
+                </div>
+
+                <div id="stepOTP" style="display:none;">
+                    <input type="text" id="otpInput" placeholder="Enter OTP">
+                    <button onclick="verifyOTP()">Verify OTP</button>
+                </div>
+
+                <div id="stepPassword" style="display:none;">
+
+                    <div class="password-field">
+                        <label>Enter new password</label>
+                        <input type="password" id="passwordInput">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+
+                    <div class="password-field">
+                        <label>Confirm new password</label>
+                        <input type="password" id="confirmPasswordInput">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+
+                    <button onclick="resetPass()">Reset</button>
+                </div>
+
+                <span class="close-btn" onclick="closeForgot()">×</span>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="script.js"></script>
+
+</html>

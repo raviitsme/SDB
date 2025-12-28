@@ -1,0 +1,280 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    font-family: 'Ubuntu', sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+#particlesCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: #0d1117;
+    /* border-radius: 20px; */
+}
+
+h1 {
+    color: white;
+    margin: 10px;
+    text-align: center;
+}
+
+#container {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 500px;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+
+.login-form {
+    color: white;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    width: 280px;
+}
+
+.input-group label {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+    color: #d0d0d0;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 14px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+    backdrop-filter: blur(4px);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s ease-in-out;
+    backdrop-filter: blur(4px);
+}
+
+/* Neon Focus Effect */
+.input-group input:focus {
+    border-color: #6a5af9;
+    box-shadow:
+        0 0 5px #6a5af9,
+        0 0 10px #6a5af9,
+        0 0 20px #6a5af9,
+        0 0 40px #6a5af9;
+    background: rgba(255, 255, 255, 0.25);
+}
+
+
+button {
+    margin-top: 15px;
+    padding: 12px;
+    width: 280px;
+    background: linear-gradient(135deg, #6a5af9, #00d4ff);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+.form-link {
+    margin-top: 14px;
+    font-size: 13px;
+    color: #bdbdbd;
+    text-align: center;
+}
+
+.form-link a {
+    color: #6a5af9;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 4px;
+    position: relative;
+    transition: color 0.25s ease;
+}
+
+.form-link a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, #6a5af9, #00d4ff);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.form-link a:hover {
+    color: #00d4ff;
+}
+
+.form-link a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group i {
+    position: absolute;
+    right: 5%;
+    top: 68%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 16px;
+    z-index: 5;
+    transition: transform 0.15s ease;
+}
+
+/* input ke text ko icon se door rakho */
+.input-group input {
+    padding-right: 42px;
+}
+
+.input-group i.pop {
+    transform: scale(1.2);
+}
+
+/* Overlay */
+.forgot-container {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.496);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+/* Box */
+.forgot-box {
+    background: #fff;
+    width: 320px;
+    padding: 24px;
+    border-radius: 10px;
+    text-align: center;
+    animation: scaleIn 0.3s ease;
+    position: relative;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.forgot-box h3 {
+    margin-bottom: 16px;
+}
+
+.forgot-box input {
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.forgot-box button {
+    width: 100%;
+    padding: 10px;
+    background: #4f46e5;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.password-field {
+    position: relative;
+    margin-top: 15px;
+}
+
+.password-field input {
+    width: 100%;
+    padding: 10px 40px 10px 10px;
+}
+
+.password-field i {
+    position: absolute;
+    right: 12px;
+    top: 55%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+}
+
+.password-field i.pop {
+    transform: scale(1.2);
+    transition: transform 0.2s;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    font-size: 20px;
+    cursor: pointer;
+}

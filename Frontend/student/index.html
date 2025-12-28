@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard</title>
+
+    <!-- Icons & Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300..700&display=swap" rel="stylesheet">
+
+    <!-- Reuse same admin CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- TOP HEADER -->
+    <header class="top-header">
+        <h1 class="site-title">School Management System</h1>
+    </header>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2 class="logo">Student Panel</h2>
+
+        <ul class="menu">
+            <li class="active" data-page="dashboard">
+                <i class="fa-solid fa-chart-line"></i> Dashboard
+            </li>
+            <li data-page="profile">
+                <i class="fa-solid fa-user"></i> My Profile
+            </li>
+            <li data-page="courses">
+                <i class="fa-solid fa-book"></i> My Courses
+            </li>
+            <li data-page="attendance">
+                <i class="fa-solid fa-calendar-check"></i> Attendance
+            </li>
+            <li data-page="assignments">
+                <i class="fa-solid fa-file-lines"></i> Assignments
+            </li>
+            <li data-page="results">
+                <i class="fa-solid fa-chart-bar"></i> Results
+            </li>
+            <li data-page="notifications">
+                <i class="fa-solid fa-bell"></i> Notifications
+            </li>
+            <li onclick="logout()">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="main">
+        <header class="topbar">
+            <h3 id="pageTitle">Dashboard</h3>
+            <span>Welcome, Student</span>
+        </header>
+
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="page active">
+            <div class="cards">
+                <div class="card">
+                    <h4>Total Subjects</h4>
+                    <p>6</p>
+                </div>
+                <div class="card">
+                    <h4>Attendance</h4>
+                    <p>92%</p>
+                </div>
+                <div class="card">
+                    <h4>Pending Assignments</h4>
+                    <p>2</p>
+                </div>
+                <div class="card">
+                    <h4>Notifications</h4>
+                    <p>1</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFILE -->
+        <section id="profile" class="page">
+            <div class="table-box">
+                <h3>My Profile</h3>
+                <table>
+                    <tbody id="myProfileBody">
+                        <tr><th>Name</th><td id="std_name" class="failed"></td></tr>
+                        <tr><th>Student ID</th><td id="std_id" class="failed"></td></tr>
+                        <tr><th>Class</th><td id="std_class" class="failed"></td></tr>
+                        <tr><th>Email</th><td id="std_email" class="failed"></td></tr>
+                        <tr><th>Phone</th><td id="std_phone" class="failed"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- COURSES -->
+        <section id="courses" class="page">
+            <div class="table-box">
+                <h3>My Courses</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Teacher</th>
+                            <th>Schedule</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Data Structures</td>
+                            <td>Mr. Sharma</td>
+                            <td>Mon - Wed</td>
+                        </tr>
+                        <tr>
+                            <td>DBMS</td>
+                            <td>Ms. Verma</td>
+                            <td>Tue - Thu</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ATTENDANCE -->
+        <section id="attendance" class="page">
+            <div class="table-box">
+                <h3>Attendance</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Present</th>
+                            <th>Total</th>
+                            <th>Percentage</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceBody">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ASSIGNMENTS -->
+        <section id="assignments" class="page">
+            <div class="table-box">
+                <h3>Assignments</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Subject</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Linked List</td>
+                            <td>DS</td>
+                            <td>25 Jan</td>
+                            <td>Pending</td>
+                        </tr>
+                        <tr>
+                            <td>SQL Queries</td>
+                            <td>DBMS</td>
+                            <td>20 Jan</td>
+                            <td>Submitted</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- RESULTS -->
+        <section id="results" class="page">
+            <div class="table-box">
+                <h3>Results</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Marks</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Data Structures</td>
+                            <td>78</td>
+                            <td>B+</td>
+                        </tr>
+                        <tr>
+                            <td>DBMS</td>
+                            <td>82</td>
+                            <td>A</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- NOTIFICATIONS -->
+        <section id="notifications" class="page">
+            <div class="table-box">
+                <h3>Notifications</h3>
+                <p>No new notifications.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JS -->
+     <script src="../footer/footer.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
