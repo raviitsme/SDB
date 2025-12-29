@@ -61,6 +61,7 @@ exports.login = async (req, res) => {
         const token = jwt.sign(
           {
             user_id: user.user_id,
+            id : user.id,
             role: t.role
           },
           process.env.JWT_SECRET,
@@ -68,12 +69,13 @@ exports.login = async (req, res) => {
             expiresIn: '1h'
           }
         )
-
+        
         return res.json({
           success: true,
           role: t.role,
           token,
           user: {
+            id : user.id,
             user_id: user.user_id,
             name: user.name,
             email: user.email,
@@ -81,7 +83,7 @@ exports.login = async (req, res) => {
         });
       }
     }
-
+    
     return res.json({
       success: false,
       message: "User not found",
@@ -105,6 +107,8 @@ exports.forgotPassword = async (req, res) => {
   }
 
   const tables = [
+    { table: "RM_SDB_Admins", role: "admin" },
+    { table: "RM_SDB_Master", role: "SuperUser" },
     { table: "RM_SDB_Employee", role: "employee" },
     { table: "RM_SDB_Students", role: "student" }
   ];
@@ -116,13 +120,15 @@ exports.forgotPassword = async (req, res) => {
         .select("id, user_id, name, email")
         .eq("user_id", user_id);
 
+
       if (error) {
+        console.error(error);
         continue;
       }
 
       if (data && data.length > 0) {
         const user = data[0];
-
+  
         const otp = generateOTP();
 
         otpStore[user_id] = {
@@ -207,7 +213,7 @@ exports.resetPass = async (req, res) => {
 
   const hashedPass = await bcrypt.hash(newPass, 10);
 
-  const tables = ["RM_SDB_Students", "RM_SDB_Employee"];
+  const tables = ["RM_SDB_Students", "RM_SDB_Employee", "RM_SDB_Admins", "RM_SDB_Master"];
   let updated = false;
 
   for (const t of tables) {
@@ -289,7 +295,7 @@ exports.createUser = async (req, res) => {
 
       const { data, error } = await supabase.from("RM_SDB_Master").insert([
         {
-          full_name: name,
+          name,
           role,
           email,
           user_id,
@@ -337,7 +343,7 @@ exports.createUser = async (req, res) => {
       const user_id = await generateUserID({ role: "employee" });
       await supabase.from("RM_SDB_Master").insert([
         {
-          full_name: name,
+          name,
           role,
           email,
           user_id,

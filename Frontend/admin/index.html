@@ -61,13 +61,47 @@
             </section>
 
             <!-- ADMINS -->
+             <div id="addAdminModal" class="modal">
+
+                <div class="modal-content">
+                    <h3 class="modal-title">Add New Admin</h3>
+
+                    <div class="input-group">
+                        <input type="text" id="adminName" required>
+                        <label for="AdminID">Admin Name</label>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="text" id="adminID" required>
+                        <label for="AdminID">Admin ID</label>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="email" id="adminEmail" required>
+                        <label for="AdminID">Admin Email</label>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="text" id="adminPhone" required>
+                        <label for="AdminID">Admin Phone</label>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button class="btn-cancel" onclick="closeAddAdmin()">Cancel</button>
+                        <button class="btn-confirm">Confirm</button>
+                    </div>
+
+                </div>
+             </div>
             <section id="admins" class="page">
                 <div class="table-box">
                     <h3>Admins List</h3>
+                <button class="addUser" id="add-admin"><i class="fa-solid fa-user-plus"></i>Add Admin</button>
                     <table>
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Admin ID</th>
                                 <th>Email</th>
                                 <th>Phone Number</th>
                                 <th>Action</th>

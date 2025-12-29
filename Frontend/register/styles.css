@@ -259,7 +259,7 @@ h1 {
     left: 0;
     bottom: -2px;
     width: 100%;
-    height: 1px;
+    height: 1.5px;
     background: linear-gradient(90deg, #6a5af9, #00d4ff);
     transform: scaleX(0);
     transform-origin: right;

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { getAdmins, deleteAdmins, getEmployees, deleteTeachers, getDashboardData, getStudents, deleteStudents } = require('../controllers/adminController');
+const { verifyToken } = require('../middlewares/verifyToken');
 
 // Get Dashboard Data
 router.get("/getDashboardData", getDashboardData);
@@ -12,7 +13,7 @@ router.get('/getAdmins', getAdmins);
 router.get('/getEmployees', getEmployees);
 
 // Delete Admins
-router.delete('/deleteAdmins/:id', deleteAdmins);
+router.delete('/deleteAdmins/:id',verifyToken, deleteAdmins);
 
 // Delete Teachers
 router.delete('/deleteTeachers/:id', deleteTeachers);

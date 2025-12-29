@@ -32,15 +32,16 @@ app.get("/", (req, res) => {
 
 app.get('/insert-test-admin', async (req, res) => {
   try {
-    const hashedPass = await bcrypt.hash("toomuchwork@01", 10);
+    const hashedPass = await bcrypt.hash("helloravi@123", 10);
     const { data, error } = await supabase
       .from('RM_SDB_Admins')
       .insert([
         {
-          name: "Test Admin",
-          email: "testhaiyaar@gmail.com",
+          user_id : "ADMN2025001",
+          name: "Ravi Mohan",
+          email: "its.raviohan01@gmail.com",
           password: hashedPass,
-          phone: 6394539726
+          phone: 9450866157
         }
       ]);
     if (error) {

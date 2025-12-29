@@ -41,7 +41,7 @@ exports.getAdmins = async (req, res) => {
   try {
     const { data, error } = await supabase
       .from("RM_SDB_Admins")
-      .select("id, name, email, phone");
+      .select("id, user_id, name, email, phone");
 
     if (error) {
       console.error("Error fetching data from server.", error.message);
@@ -69,11 +69,19 @@ exports.getAdmins = async (req, res) => {
 exports.deleteAdmins = async(req, res) => {
     try {
         const { id } = req.params;
+        const loggedInAdminID = req.user.id;
 
         if(!id) {
             return res.status(400).json({
                 success : false,
                 message : "Failed to fetch admin ID"
+            });
+        }
+
+        if (parseInt(id) === parseInt(loggedInAdminID)) {
+            return res.status(403).json({
+                success: false,
+                message: "You cannot delete your own account"
             });
         }
 

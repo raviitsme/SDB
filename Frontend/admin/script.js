@@ -76,6 +76,7 @@ async function loadAdmins() {
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td>${admin.name}</td>
+        <td>${admin.user_id}</td>
         <td>${admin.email}</td>
         <td>${admin.phone}</td>
         <td>
@@ -96,11 +97,34 @@ function logout() {
   window.location.href = '../login/index.html'
 }
 
+
+const modal = document.getElementById('addAdminModal');
+const addBtn = document.getElementById('add-admin');
+
+addBtn.addEventListener('click', () => {
+  modal.classList.add('active');
+  document.body.classList.add('modal-open');
+})
+
+function closeAddAdmin() {
+  modal.classList.remove("active");
+  document.body.classList.remove("modal-open");
+
+  // Clear all input fields
+  document.getElementById("adminID").value = "";
+  document.getElementById("adminName").value = "";
+  document.getElementById("adminPhone").value = "";
+  document.getElementById("adminEmail").value = "";
+}
+
+
 /* ================== Delete Admins ================== */
 
 document.addEventListener('click', async(e) => {
   if(e.target.classList.contains('deleteAdmin')) {
     const adminId = e.target.dataset.id
+
+    const token = localStorage.getItem('token');
 
     if(!confirm("Are you sure you want to delete this admin?")) {
       return;
@@ -109,7 +133,8 @@ document.addEventListener('click', async(e) => {
       const response = await fetch(`http://localhost:3000/management/deleteAdmins/${adminId}`, {
         method : "DELETE",
         headers : {
-          'Content-Type' : "application/json"
+          'Content-Type' : "application/json",
+          'Authorization' : `Bearer ${token}`
         },
         body : JSON.stringify({ id : adminId }) 
       });
