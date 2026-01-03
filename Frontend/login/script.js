@@ -116,7 +116,7 @@ async function sendOTP() {
     if (!user_id) return alert("Enter User ID");
 
     try {
-        const response = await fetch("http://localhost:3000/auth/forgotPassword", {
+        const response = await fetch("https://sdb-21qd.onrender.com/auth/forgotPassword", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -146,7 +146,7 @@ async function verifyOTP() {
     const user_id = document.getElementById("forgotEmail").value;
     if (!otp) return alert("Enter OTP");
 
-    const response = await fetch("http://localhost:3000/auth/verifyOTP", {
+    const response = await fetch("https://sdb-21qd.onrender.com/auth/verifyOTP", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -207,7 +207,7 @@ async function resetPass() {
 
     try {
         
-        const response = await fetch('http://localhost:3000/auth/resetPass', {
+        const response = await fetch('https://sdb-21qd.onrender.com/auth/resetPass', {
             method : "POST",
             headers : {
                 'Content-Type' : 'application/json'
@@ -235,7 +235,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     const password = document.getElementById("password").value;
 
     try {
-        const response = await fetch("http://localhost:3000/auth/login", {
+        const response = await fetch("https://sdb-21qd.onrender.com/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

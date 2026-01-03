@@ -36,7 +36,7 @@ function formatDate(dateString) {
 /* ================== Dashboard Data ================== */
 async function getDashboardData() {
   try {
-    const response = await fetch("http://localhost:3000/management/getDashboardData");
+    const response = await fetch("https://sdb-21qd.onrender.com//management/getDashboardData");
     const data = await response.json();
 
     if(!data.success) {
@@ -62,7 +62,7 @@ async function loadAdmins() {
   tbody.innerHTML = `<tr><td colspan="4">Loading admins...</td></tr>`;
 
   try {
-    const res = await fetch("http://localhost:3000/management/getAdmins");
+    const res = await fetch("https://sdb-21qd.onrender.com//management/getAdmins");
     const result = await res.json();
 
     tbody.innerHTML = "";
@@ -130,7 +130,7 @@ document.addEventListener('click', async(e) => {
       return;
     }
     try{
-      const response = await fetch(`http://localhost:3000/management/deleteAdmins/${adminId}`, {
+      const response = await fetch(`https://sdb-21qd.onrender.com//management/deleteAdmins/${adminId}`, {
         method : "DELETE",
         headers : {
           'Content-Type' : "application/json",
@@ -164,7 +164,7 @@ const loadTeachers = async () => {
   tbody.innerHTML = `<tr><td colspan=5>Loading Teachers...</td></tr>`;
 
   try {
-    const response = await fetch('http://localhost:3000/management/getEmployees');
+    const response = await fetch('https://sdb-21qd.onrender.com//management/getEmployees');
     const result = await response.json();
 
     tbody.innerHTML = '';
@@ -203,7 +203,7 @@ document.addEventListener('click', async (e) => {
       return;
     }
     try {
-      const response = await fetch(`http://localhost:3000/management/deleteTeachers/${empId}`, {
+      const response = await fetch(`https://sdb-21qd.onrender.com//management/deleteTeachers/${empId}`, {
         method : "DELETE",
         headers : {
           'Content-Type' : "application/json"
@@ -236,7 +236,7 @@ async function loadStudents() {
   tbody.innerHTML = `<tr><td colspan='5'>Loading Students...</td></tr>`
 
   try {
-    const response = await fetch('http://localhost:3000/management/getStudents');
+    const response = await fetch('https://sdb-21qd.onrender.com//management/getStudents');
     const result = await response.json();
 
     tbody.innerHTML = '';
@@ -276,7 +276,7 @@ document.addEventListener('click', async(e) => {
       return;
     }
     try{
-      const response = await fetch(`http://localhost:3000/management/deleteStudents/${stdId}`, {
+      const response = await fetch(`https://sdb-21qd.onrender.com//management/deleteStudents/${stdId}`, {
         method : "DELETE",
         headers : {
           'Content-Type' : "application/json"
