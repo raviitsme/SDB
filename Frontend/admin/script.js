@@ -36,10 +36,16 @@ function formatDate(dateString) {
 /* ================== Dashboard Data ================== */
 async function getDashboardData() {
   try {
-    const response = await fetch("https://sdb-21qd.onrender.com//management/getDashboardData");
+    const response = await fetch("https://sdb-21qd.onrender.com//management/getDashboardData", {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: "include"
+    });
     const data = await response.json();
 
-    if(!data.success) {
+    if (!data.success) {
       return;
     }
 
@@ -48,7 +54,7 @@ async function getDashboardData() {
     document.getElementById('totalStudents').innerText = data.counts.students;
 
   } catch (err) {
-    console.error("Failed to get dashboard count : ",err);
+    console.error("Failed to get dashboard count : ", err);
   }
 };
 
@@ -62,7 +68,13 @@ async function loadAdmins() {
   tbody.innerHTML = `<tr><td colspan="4">Loading admins...</td></tr>`;
 
   try {
-    const res = await fetch("https://sdb-21qd.onrender.com//management/getAdmins");
+    const res = await fetch("https://sdb-21qd.onrender.com//management/getAdmins,", {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: "include"
+    });
     const result = await res.json();
 
     tbody.innerHTML = "";
@@ -120,42 +132,42 @@ function closeAddAdmin() {
 
 /* ================== Delete Admins ================== */
 
-document.addEventListener('click', async(e) => {
-  if(e.target.classList.contains('deleteAdmin')) {
+document.addEventListener('click', async (e) => {
+  if (e.target.classList.contains('deleteAdmin')) {
     const adminId = e.target.dataset.id
 
     const token = localStorage.getItem('token');
 
-    if(!confirm("Are you sure you want to delete this admin?")) {
+    if (!confirm("Are you sure you want to delete this admin?")) {
       return;
     }
-    try{
+    try {
       const response = await fetch(`https://sdb-21qd.onrender.com//management/deleteAdmins/${adminId}`, {
-        method : "DELETE",
-        credentials : true,
-        headers : {
-          'Content-Type' : "application/json",
-          'Authorization' : `Bearer ${token}`
+        method: "DELETE",
+        credentials: true,
+        headers: {
+          'Content-Type': "application/json",
+          'Authorization': `Bearer ${token}`
         },
-        body : JSON.stringify({ id : adminId }) 
+        body: JSON.stringify({ id: adminId })
       });
       const data = await response.json();
-      if(!response.ok) {
+      if (!response.ok) {
         console.error("Error : ", data);
         alert(data.message || 'Something went wrong');
-        return; 
+        return;
       }
-      if(data.success) {
+      if (data.success) {
         e.target.closest('tr').remove();
         alert("Admin deleted successfully.");
-      } else { 
+      } else {
         alert(data.message);
       }
-   } catch (err) {
-    console.error("Error : ", err);
-    alert("Server Error occurred!");
-   }
-  } 
+    } catch (err) {
+      console.error("Error : ", err);
+      alert("Server Error occurred!");
+    }
+  }
 });
 
 /* ================== Load Teachers ================== */
@@ -165,12 +177,18 @@ const loadTeachers = async () => {
   tbody.innerHTML = `<tr><td colspan=5>Loading Teachers...</td></tr>`;
 
   try {
-    const response = await fetch('https://sdb-21qd.onrender.com//management/getEmployees');
+    const response = await fetch('https://sdb-21qd.onrender.com//management/getEmployees', {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: "include"
+    });
     const result = await response.json();
 
     tbody.innerHTML = '';
 
-    if(!result.success || result.employees.length === 0) {
+    if (!result.success || result.employees.length === 0) {
       tbody.innerHTML = `<tr><td colspan='5'>No Employees found.</td></tr>`
       return;
     }
@@ -197,29 +215,29 @@ const loadTeachers = async () => {
 
 /* ================== Delete Teachers ================== */
 document.addEventListener('click', async (e) => {
-  if(e.target.classList.contains('deleteEmp')) {
-    
+  if (e.target.classList.contains('deleteEmp')) {
+
     const empId = e.target.dataset.id;
-    if(!confirm("Are you sure you want to delete this employee?")) {
+    if (!confirm("Are you sure you want to delete this employee?")) {
       return;
     }
     try {
       const response = await fetch(`https://sdb-21qd.onrender.com//management/deleteTeachers/${empId}`, {
-        method : "DELETE",
-        credentials : true,
-        headers : {
-          'Content-Type' : "application/json"
+        method: "DELETE",
+        credentials: true,
+        headers: {
+          'Content-Type': "application/json"
         }
       });
       const data = await response.json();
 
-      if(!response.ok) {
+      if (!response.ok) {
         console.error("Error Occurred : ", data);
         alert(data.message || 'Something went wrong');
         return;
       }
 
-      if(data.success) {
+      if (data.success) {
         e.target.closest('tr').remove();
         alert("Employee deleted successfully.")
       } else {
@@ -229,7 +247,7 @@ document.addEventListener('click', async (e) => {
       console.error("Server error :", err);
       alert("Failed to delete Employee.");
     }
-  }  
+  }
 });
 
 // ================== Load Students ===================
@@ -238,12 +256,18 @@ async function loadStudents() {
   tbody.innerHTML = `<tr><td colspan='5'>Loading Students...</td></tr>`
 
   try {
-    const response = await fetch('https://sdb-21qd.onrender.com//management/getStudents');
+    const response = await fetch('https://sdb-21qd.onrender.com//management/getStudents', {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: "include"
+    });
     const result = await response.json();
 
     tbody.innerHTML = '';
 
-    if(!result.success || result.students.length === 0) {
+    if (!result.success || result.students.length === 0) {
       tbody.innerHTML = `<tr><td colspan='5'>No students found.</td></tr>`
     }
 
@@ -261,45 +285,45 @@ async function loadStudents() {
       `;
       tbody.appendChild(tr);
     });
-  } catch (err){
+  } catch (err) {
     console.log("Error ", err)
     console.error(err)
-      tbody.innerHTML = `<tr><td colspan='5'>Server Failure</td></tr>`
+    tbody.innerHTML = `<tr><td colspan='5'>Server Failure</td></tr>`
   }
 }
 
 /* ================== Delete Students ================== */
 
-document.addEventListener('click', async(e) => {
-  if(e.target.classList.contains('deleteStd')) {
+document.addEventListener('click', async (e) => {
+  if (e.target.classList.contains('deleteStd')) {
     const stdId = e.target.dataset.id
 
-    if(!confirm("Are you sure you want to delete this student?")) {
+    if (!confirm("Are you sure you want to delete this student?")) {
       return;
     }
-    try{
+    try {
       const response = await fetch(`https://sdb-21qd.onrender.com//management/deleteStudents/${stdId}`, {
-        method : "DELETE",
-        credentials : true,
-        headers : {
-          'Content-Type' : "application/json"
+        method: "DELETE",
+        credentials: true,
+        headers: {
+          'Content-Type': "application/json"
         }
       });
       const data = await response.json();
-      if(!response.ok) {
+      if (!response.ok) {
         console.error("Error : ", data);
         alert(data.message || 'Something went wrong');
-        return; 
+        return;
       }
-      if(data.success) {
+      if (data.success) {
         e.target.closest('tr').remove();
         alert("Student deleted successfully.");
-      } else { 
+      } else {
         alert(data.message);
       }
-   } catch (err) {
-    console.error("Error : ", err);
-    alert("Server Error occurred!");
-   }
-  } 
+    } catch (err) {
+      console.error("Error : ", err);
+      alert("Server Error occurred!");
+    }
+  }
 });
