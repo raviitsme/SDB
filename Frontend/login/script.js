@@ -148,6 +148,7 @@ async function verifyOTP() {
 
     const response = await fetch("https://sdb-21qd.onrender.com/auth/verifyOTP", {
         method: "POST",
+        credentials : true,
         headers: {
             'Content-Type': 'application/json'
         },
@@ -209,6 +210,7 @@ async function resetPass() {
         
         const response = await fetch('https://sdb-21qd.onrender.com/auth/resetPass', {
             method : "POST",
+            credentials : true,
             headers : {
                 'Content-Type' : 'application/json'
             },
@@ -237,6 +239,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     try {
         const response = await fetch("https://sdb-21qd.onrender.com/auth/login", {
             method: "POST",
+            credentials : true,
             headers: {
                 "Content-Type": "application/json"
             },
