@@ -132,6 +132,7 @@ document.addEventListener('click', async(e) => {
     try{
       const response = await fetch(`https://sdb-21qd.onrender.com//management/deleteAdmins/${adminId}`, {
         method : "DELETE",
+        credentials : true,
         headers : {
           'Content-Type' : "application/json",
           'Authorization' : `Bearer ${token}`
@@ -205,6 +206,7 @@ document.addEventListener('click', async (e) => {
     try {
       const response = await fetch(`https://sdb-21qd.onrender.com//management/deleteTeachers/${empId}`, {
         method : "DELETE",
+        credentials : true,
         headers : {
           'Content-Type' : "application/json"
         }
@@ -278,6 +280,7 @@ document.addEventListener('click', async(e) => {
     try{
       const response = await fetch(`https://sdb-21qd.onrender.com//management/deleteStudents/${stdId}`, {
         method : "DELETE",
+        credentials : true,
         headers : {
           'Content-Type' : "application/json"
         }
