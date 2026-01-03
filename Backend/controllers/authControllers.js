@@ -313,7 +313,7 @@ exports.createUser = async (req, res) => {
       }
 
       await transporter.sendMail({
-        from: process.env.EMAIL_USER,
+        from: `"School Management" <${process.env.EMAIL_USER}>`,
         to: email,
         subject: "Welcome to School Management System",
         html: welcomeEmail(name, role, user_id),
