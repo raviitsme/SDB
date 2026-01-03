@@ -13,12 +13,11 @@ require("dotenv").config();
 const app = express();
 
 // CORS
-app.use(
-  cors({
-    origin: ["sdb-7lm.pages.dev"],
-    credentials : true
-  })
-);
+app.use(cors({
+  origin: "https://sdb-7lm.pages.dev",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
 // JSON body parsing
 app.use(express.json());
