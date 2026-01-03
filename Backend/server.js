@@ -13,11 +13,19 @@ require("dotenv").config();
 const app = express();
 
 // CORS
+// CORS
 app.use(cors({
   origin: "https://sdb-7lm.pages.dev",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
+
+// Preflight for all routes
+app.options("*", cors({
+  origin: "https://sdb-7lm.pages.dev",
+  credentials: true
+}));
+
 
 // JSON body parsing
 app.use(express.json());
