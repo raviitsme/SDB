@@ -116,7 +116,7 @@ async function sendOTP() {
     if (!user_id) return alert("Enter User ID");
 
     try {
-        const response = await fetch("https://sdb-21qd.onrender.com/auth/forgotPassword", {
+        const response = await fetch("http://localhost:3000/auth/forgotPassword", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -146,9 +146,9 @@ async function verifyOTP() {
     const user_id = document.getElementById("forgotEmail").value;
     if (!otp) return alert("Enter OTP");
 
-    const response = await fetch("https://sdb-21qd.onrender.com/auth/verifyOTP", {
+    const response = await fetch("http://localhost:3000/auth/verifyOTP", {
         method: "POST",
-        credentials : true,
+        credentials : 'include',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -208,9 +208,9 @@ async function resetPass() {
 
     try {
         
-        const response = await fetch('https://sdb-21qd.onrender.com/auth/resetPass', {
+        const response = await fetch('http://localhost:3000/auth/resetPass', {
             method : "POST",
-            credentials : true,
+            credentials : "include",
             headers : {
                 'Content-Type' : 'application/json'
             },
@@ -233,17 +233,17 @@ async function resetPass() {
 document.getElementById("loginForm").addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    const email = document.getElementById("email").value;
+    const user_id = document.getElementById("userID").value;
     const password = document.getElementById("password").value;
 
     try {
-        const response = await fetch("https://sdb-21qd.onrender.com/auth/login", {
+        const response = await fetch("http://localhost:3000/auth/login", {
             method: "POST",
-            credentials : true,
+            credentials : 'include',
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ user_id, password })
         });
 
         const data = await response.json();

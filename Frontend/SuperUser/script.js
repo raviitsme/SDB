@@ -79,7 +79,7 @@ async function addUser() {
         } 
         
         if (data.success) {
-            status.textContent = `${role.toUpperCase()} created, email is sent and user id is : ${data.user_id}`;
+            status.textContent = `${role.toUpperCase()} created, email is sent to the user!`;
             status.style.color = '#070707ff';
             document.getElementById("name").value = "";
             document.getElementById("email").value = "";

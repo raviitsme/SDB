@@ -68,27 +68,22 @@
 
                     <div class="input-group">
                         <input type="text" id="adminName" required>
-                        <label for="AdminID">Admin Name</label>
-                    </div>
-
-                    <div class="input-group">
-                        <input type="text" id="adminID" required>
-                        <label for="AdminID">Admin ID</label>
+                        <label for="adminName">Admin Name</label>
                     </div>
 
                     <div class="input-group">
                         <input type="email" id="adminEmail" required>
-                        <label for="AdminID">Admin Email</label>
+                        <label for="adminEmail">Admin Email</label>
                     </div>
 
                     <div class="input-group">
                         <input type="text" id="adminPhone" required>
-                        <label for="AdminID">Admin Phone</label>
+                        <label for="adminPhone">Admin Phone</label>
                     </div>
-
+                    <p id="errorMsg" style="color: red;"></p>
                     <div class="modal-actions">
                         <button class="btn-cancel" onclick="closeAddAdmin()">Cancel</button>
-                        <button class="btn-confirm">Confirm</button>
+                        <button class="btn-confirm" onclick="addAdmin()">Confirm</button>
                     </div>
 
                 </div>

@@ -18,9 +18,9 @@ const transporter = nodemailer.createTransport({
 });
 
 exports.login = async (req, res) => {
-  const { email, password } = req.body;
+  const { user_id, password } = req.body;
 
-  if (!email || !password) {
+  if (!user_id || !password) {
     return res.status(400).json({
       success: false,
       message: "Email and password are required",
@@ -39,7 +39,7 @@ exports.login = async (req, res) => {
       const { data, error } = await supabase
         .from(t.table)
         .select("*")
-        .eq("email", email)
+        .eq("user_id", user_id)
         .limit(1);
 
       if (error) {
@@ -383,24 +383,49 @@ exports.registerUser = async (req, res) => {
   }
 
   try {
-    // Check enrollment
-    const { data: isEnrolled, error: enrollError } = await supabase
+    // ================= ENROLLMENT CHECK =================
+
+    // Check by user_id
+    const { data: byUserId, error: idError } = await supabase
       .from("RM_SDB_Master")
-      .select('id, email, std_class')
+      .select("id, email, std_class")
       .eq("user_id", user_id)
+      .maybeSingle();
+
+    if (idError) throw idError;
+
+    // Check by email
+    const { data: byEmail, error: emailError } = await supabase
+      .from("RM_SDB_Master")
+      .select("id, user_id, std_class")
       .eq("email", email)
       .maybeSingle();
 
-    if (enrollError) throw enrollError;
+    if (emailError) throw emailError;
 
-    if (!isEnrolled) {
+    // User not found at all
+    if (!byUserId && !byEmail) {
       return res.json({
         success: false,
-        message: "User is not enrolled",
+        message: "User not found",
       });
     }
 
-    // Detect role
+    // User exists but mismatch
+    if (
+      (byUserId && byUserId.email !== email) ||
+      (byEmail && byEmail.user_id !== user_id)
+    ) {
+      return res.json({
+        success: false,
+        message: "User ID or email isn't correct",
+      });
+    }
+
+    // ✅ Properly enrolled user
+    const isEnrolled = byUserId; // confirmed correct record
+
+    // ================= ROLE DETECTION =================
     const role = user_id[0].toUpperCase() === "S" ? "student" : "employee";
     console.log("Detected role:", role);
 
@@ -421,6 +446,7 @@ exports.registerUser = async (req, res) => {
       }
 
       const hashedPass = await bcrypt.hash(password, 10);
+
       const { data, error } = await supabase
         .from("RM_SDB_Students")
         .insert([{
@@ -429,7 +455,7 @@ exports.registerUser = async (req, res) => {
           email,
           password: hashedPass,
           phone,
-          std_class: isEnrolled.std_class
+          std_class: isEnrolled.std_class,
         }]);
 
       if (error) throw error;
@@ -448,11 +474,9 @@ exports.registerUser = async (req, res) => {
         .select("user_id")
         .eq("user_id", user_id);
 
-      if (empError) {
-        throw empError;
-      }
+      if (empError) throw empError;
 
-      if (existingEmp.length > 0) {
+      if (existingEmp?.length > 0) {
         return res.json({
           success: false,
           message: "Employee already exists, please login.",
@@ -460,6 +484,7 @@ exports.registerUser = async (req, res) => {
       }
 
       const hashedPass = await bcrypt.hash(password, 10);
+
       const { data, error } = await supabase
         .from("RM_SDB_Employee")
         .insert([{
@@ -470,9 +495,8 @@ exports.registerUser = async (req, res) => {
           phone,
         }]);
 
-      if (error) {
-        throw error;
-      }
+      if (error) throw error;
+
       return res.json({
         success: true,
         message: "Employee registered successfully",

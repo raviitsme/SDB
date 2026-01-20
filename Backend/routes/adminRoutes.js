@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAdmins, deleteAdmins, getEmployees, deleteTeachers, getDashboardData, getStudents, deleteStudents } = require('../controllers/adminController');
+const { getAdmins, deleteAdmins, getEmployees, deleteTeachers, getDashboardData, getStudents, deleteStudents, addAdmins } = require('../controllers/adminController');
 const { verifyToken } = require('../middlewares/verifyToken');
 
 // Get Dashboard Data
@@ -8,6 +8,9 @@ router.get("/getDashboardData", getDashboardData);
 
 // Fetch Admins
 router.get('/getAdmins', getAdmins);
+
+// Add Admins
+router.post('/addAdmin', addAdmins)
 
 //Fetch Teachers
 router.get('/getEmployees', getEmployees);

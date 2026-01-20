@@ -36,7 +36,7 @@ function formatDate(dateString) {
 /* ================== Dashboard Data ================== */
 async function getDashboardData() {
   try {
-    const response = await fetch("https://sdb-21qd.onrender.com//management/getDashboardData", {
+    const response = await fetch("http://localhost:3000/management/getDashboardData", {
       method: "GET",
       headers: {
         'Content-Type': 'application/json'
@@ -68,7 +68,7 @@ async function loadAdmins() {
   tbody.innerHTML = `<tr><td colspan="4">Loading admins...</td></tr>`;
 
   try {
-    const res = await fetch("https://sdb-21qd.onrender.com//management/getAdmins,", {
+    const res = await fetch("http://localhost:3000/management/getAdmins", {
       method: "GET",
       headers: {
         'Content-Type': 'application/json'
@@ -142,9 +142,9 @@ document.addEventListener('click', async (e) => {
       return;
     }
     try {
-      const response = await fetch(`https://sdb-21qd.onrender.com//management/deleteAdmins/${adminId}`, {
+      const response = await fetch(`http://localhost:3000/management/deleteAdmins/${adminId}`, {
         method: "DELETE",
-        credentials: true,
+        credentials: 'include',
         headers: {
           'Content-Type': "application/json",
           'Authorization': `Bearer ${token}`
@@ -177,7 +177,7 @@ const loadTeachers = async () => {
   tbody.innerHTML = `<tr><td colspan=5>Loading Teachers...</td></tr>`;
 
   try {
-    const response = await fetch('https://sdb-21qd.onrender.com//management/getEmployees', {
+    const response = await fetch('http://localhost:3000/management/getEmployees', {
       method: "GET",
       headers: {
         'Content-Type': 'application/json'
@@ -222,9 +222,9 @@ document.addEventListener('click', async (e) => {
       return;
     }
     try {
-      const response = await fetch(`https://sdb-21qd.onrender.com//management/deleteTeachers/${empId}`, {
+      const response = await fetch(`http://localhost:3000/management/deleteTeachers/${empId}`, {
         method: "DELETE",
-        credentials: true,
+        credentials: 'include',
         headers: {
           'Content-Type': "application/json"
         }
@@ -256,7 +256,7 @@ async function loadStudents() {
   tbody.innerHTML = `<tr><td colspan='5'>Loading Students...</td></tr>`
 
   try {
-    const response = await fetch('https://sdb-21qd.onrender.com//management/getStudents', {
+    const response = await fetch('http://localhost:3000/management/getStudents', {
       method: "GET",
       headers: {
         'Content-Type': 'application/json'
@@ -302,9 +302,9 @@ document.addEventListener('click', async (e) => {
       return;
     }
     try {
-      const response = await fetch(`https://sdb-21qd.onrender.com//management/deleteStudents/${stdId}`, {
+      const response = await fetch(`http://localhost:3000/management/deleteStudents/${stdId}`, {
         method: "DELETE",
-        credentials: true,
+        credentials: 'include',
         headers: {
           'Content-Type': "application/json"
         }
@@ -327,3 +327,39 @@ document.addEventListener('click', async (e) => {
     }
   }
 });
+
+async function addAdmin() {
+  const name = document.getElementById('adminName').value;
+  const email = document.getElementById('adminEmail').value;
+  const phone = document.getElementById('adminPhone').value;
+  const errorMsg = document.getElementById('errorMsg');
+  if(!name || !email || !phone){
+    errorMsg.innerHTML = 'Fill all fields!';
+    return;
+  }
+
+  try {
+    const response = await fetch('http://localhost:3000/management/addAdmin', {
+      method : "POST",
+      credentials : 'include',
+      headers : {
+        'Content-Type' : 'application/json'
+      },
+      body : JSON.stringify({ name, email, phone })
+    });
+
+    const result = await response.json();
+    if(!result.success) {
+      errorMsg.innerText = result.message;
+      return;
+    } 
+    errorMsg.style.color = 'green';
+    errorMsg.innerText = 'Admin added successfully';
+    name.value = '';
+    email.value = '';
+    phone.value = '';
+    loadAdmins();
+  } catch (err) {
+    console.error(err);
+  }
+}

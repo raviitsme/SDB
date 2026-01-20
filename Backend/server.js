@@ -15,14 +15,14 @@ const app = express();
 // CORS
 // CORS
 app.use(cors({
-  origin: "https://sdb-7lm.pages.dev",
+  origin: ["https://sdb-7lm.pages.dev", "http://localhost:5500", "http://localhost:5501"],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 
 // Preflight for all routes
 app.options("*", cors({
-  origin: "https://sdb-7lm.pages.dev",
+    origin: ["https://sdb-7lm.pages.dev", "http://localhost:5500"],
   credentials: true
 }));
 
