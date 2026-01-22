@@ -1,5 +1,15 @@
 const supabase = require("../config/supabase");
 const generateAdminID = require("../utils/generateAdminID");
+const nodemailer = require('nodemailer');
+require('dotenv').config();
+const { adminWelcome } = require('../utils/emailTemplate');
+const transporter = nodemailer.createTransport({
+    service : 'gmail',
+    auth : {
+        user : process.env.EMAIL_USER,
+        pass : process.env.EMAIL_PASS
+    }
+});
 
 // Fetch Dashboard Data
 exports.getDashboardData = async (req, res) => {
@@ -117,11 +127,19 @@ exports.addAdmins = async (req, res) => {
             });
         }
         console.log("Insert Data : ", data);
+        await transporter.sendMail({
+            from : `School Management <${process.env.EMAIL_USER}`,
+            to : email,
+            subject : "Admin Registeration Welcome",
+            html : adminWelcome(name, adminID)
+        });
         return res.status(201).json({
             success: true,
             message: "Admin added successfully",
             admin_id: adminID
         });
+
+
     } catch (err) {
         console.error(err);
         return res.json({
@@ -182,7 +200,8 @@ exports.getEmployees = async (req, res) => {
     try {
         const { data, error } = await supabase
             .from("RM_SDB_Employee")
-            .select('id, user_id, name, email, phone');
+            .select('id, user_id, name, email, phone')
+            .order('id', { ascending : true })    
 
         if (error) {
             console.error("Error : ", error);
@@ -202,6 +221,74 @@ exports.getEmployees = async (req, res) => {
             success: false,
             message: "Error occurred."
         })
+    }
+}
+
+// Add Employees
+exports.editEmployees = async (req, res) => {
+    const { name, email, phone, assignedClass } = req.body; 
+    const { id } = req.params;
+
+    try {
+        if(!id) {
+            return res.status(400).json({
+                success : false,
+                message : "Failed to fetch Employee ID"
+            });
+        }
+
+        const updateData = {};
+        if (name) updateData.name = name;
+        if (email) updateData.email = email;
+        if (phone) updateData.phone = phone;
+        if (assignedClass) updateData.teaching_class = assignedClass;
+
+        if(email) {
+            const { data, error } = await supabase
+            .from('RM_SDB_Employee')
+            .select('id')
+            .eq('email', email)
+            .neq('id', id)
+            .maybeSingle()
+            
+            if(error) {
+                console.log("Error checking email : ", error);
+                return res.json({
+                    success : false,
+                    message : "Email check failure"
+                });
+            }
+
+            if(data) {
+                return res.status(500).json({
+                    success : false,
+                    message : "Email already exists"
+                });
+            }
+        }
+        const { error:updateError } = await supabase
+        .from('RM_SDB_Employee')
+        .update(updateData)
+        .eq('id', id)
+        
+        if(updateError) {
+            console.log("Update Error : ", updateError);
+            return res.status(500).json({
+                success : false,
+                message : "Data updation failed"
+            })
+        }
+        
+        return res.status(200).json({
+            success : true,
+            message : "Employee edited successfully."
+        });
+    } catch (err) {
+        console.log("Error : ", err);
+        return res.status(500).json({
+            success : false,
+            message : "Server Error!"
+        });
     }
 }
 

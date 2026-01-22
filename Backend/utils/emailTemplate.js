@@ -237,3 +237,87 @@ exports.studentAddedByTeacherEmail = (full_name, student_id) => {
   </div>
   `;
 };
+
+exports.adminWelcome = (full_name, user_id) => {
+  return `
+  <div style="
+      max-width: 600px;
+      margin: 0 auto;
+      font-family: 'Ubuntu', Arial, sans-serif;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      overflow: hidden;
+  ">
+
+      <!-- Header -->
+      <div style="
+          background: linear-gradient(135deg, #7c3aed, #a78bfa);
+          padding: 20px;
+          color: #ffffff;
+          text-align: center;
+      ">
+          <h2 style="margin: 0; font-weight: 600;">
+              Admin Access Granted
+          </h2>
+      </div>
+
+      <!-- Body -->
+      <div style="padding: 24px; color: #333333; font-size: 14px; line-height: 1.6;">
+          <p>Dear <strong>${full_name}</strong>,</p>
+
+          <p>
+              We are pleased to inform you that your account has been
+              <strong>successfully added as an Administrator</strong> by another admin
+              in the <strong>School Management System</strong>.
+          </p>
+
+          <p>
+              You now have access to manage system settings, users, and administrative operations.
+          </p>
+
+          <div style="
+              margin: 24px 0;
+              padding: 16px;
+              background: #f5f3ff;
+              border-left: 4px solid #7c3aed;
+              border-radius: 6px;
+          ">
+              <p style="margin: 0;"><strong>Admin ID:</strong> ${user_id}</p>
+          </div>
+
+          <p>
+              👉 To access your admin account:
+          </p>
+
+          <ol style="padding-left: 18px; color: #555;">
+              <li>Go to the <strong>Admin Login Page</strong></li>
+              <li>Enter your registered email and password</li>
+              <li>Complete verification (if required)</li>
+          </ol>
+
+          <p style="color: #555;">
+              For security purposes, please keep your credentials confidential and
+              change your password regularly.
+          </p>
+
+          <p style="margin-top: 24px;">
+              Best regards,<br>
+              <strong>School Management System Team</strong>
+          </p>
+      </div>
+
+      <!-- Footer -->
+      <div style="
+          background: #f5f7fa;
+          padding: 12px;
+          text-align: center;
+          font-size: 12px;
+          color: #777777;
+      ">
+          © ${new Date().getFullYear()} School Management System. All rights reserved.
+      </div>
+
+  </div>
+  `;
+};

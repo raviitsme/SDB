@@ -11,107 +11,107 @@
 </head>
 
 <body>
-        <!-- NEW TOP HEADER -->
-        <header class="top-header">
-            <h1 class="site-title">School Management System</h1>
+    <!-- NEW TOP HEADER -->
+    <header class="top-header">
+        <h1 class="site-title">School Management System</h1>
+    </header>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2 class="logo">Admin Panel</h2>
+
+        <ul class="menu">
+            <li class="active" data-page="dashboard"><i class="fa-solid fa-chart-line"></i> Dashboard</li>
+            <li data-page="admins"><i class="fa-solid fa-user-shield"></i> Admins</li>
+            <!-- <li data-page="superUser"><i class="fa-solid fa-user-tie"></i> Super User</li> -->
+            <li data-page="teachers"><i class="fa-solid fa-chalkboard-teacher"></i> Teachers</li>
+            <li data-page="students"><i class="fa-solid fa-user-graduate"></i> Students</li>
+            <li data-page="notifications"><i class="fa-solid fa-bell"></i> Notifications</li>
+            <li onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</li>
+        </ul>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+        <header class="topbar">
+            <h3 id="pageTitle">Dashboard</h3>
+            <span>Welcome, Admin.</span>
         </header>
 
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-            <h2 class="logo">Admin Panel</h2>
-
-            <ul class="menu">
-                <li class="active" data-page="dashboard"><i class="fa-solid fa-chart-line"></i> Dashboard</li>
-                <li data-page="admins"><i class="fa-solid fa-user-shield"></i> Admins</li>
-                <!-- <li data-page="superUser"><i class="fa-solid fa-user-tie"></i> Super User</li> -->
-                <li data-page="teachers"><i class="fa-solid fa-chalkboard-teacher"></i> Teachers</li>
-                <li data-page="students"><i class="fa-solid fa-user-graduate"></i> Students</li>
-                <li data-page="notifications"><i class="fa-solid fa-bell"></i> Notifications</li>
-                <li onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</li>
-            </ul>
-        </aside>
-
-        <!-- MAIN -->
-        <div class="main">
-            <header class="topbar">
-                <h3 id="pageTitle">Dashboard</h3>
-                <span>Welcome, Admin.</span>
-            </header>
-
-            <!-- DASHBOARD -->
-            <section id="dashboard" class="page active">
-                <div class="cards">
-                    <div class="card">
-                        <h4>Total Admins</h4>
-                        <p id="totalAdmins">0</p>
-                    </div>
-                    <div class="card">
-                        <h4>Total Employees</h4>
-                        <p id="totalEmployees">0</p>
-                    </div>
-                    <div class="card">
-                        <h4>Total Students</h4>
-                        <p id="totalStudents">0</p>
-                    </div>
-                    <div class="card">
-                        <h4>Notifications</h4>
-                        <p id="totalNotifications">0</p>
-                    </div>
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="page active">
+            <div class="cards">
+                <div class="card">
+                    <h4>Total Admins</h4>
+                    <p id="totalAdmins">0</p>
                 </div>
-            </section>
-
-            <!-- ADMINS -->
-             <div id="addAdminModal" class="modal">
-
-                <div class="modal-content">
-                    <h3 class="modal-title">Add New Admin</h3>
-
-                    <div class="input-group">
-                        <input type="text" id="adminName" required>
-                        <label for="adminName">Admin Name</label>
-                    </div>
-
-                    <div class="input-group">
-                        <input type="email" id="adminEmail" required>
-                        <label for="adminEmail">Admin Email</label>
-                    </div>
-
-                    <div class="input-group">
-                        <input type="text" id="adminPhone" required>
-                        <label for="adminPhone">Admin Phone</label>
-                    </div>
-                    <p id="errorMsg" style="color: red;"></p>
-                    <div class="modal-actions">
-                        <button class="btn-cancel" onclick="closeAddAdmin()">Cancel</button>
-                        <button class="btn-confirm" onclick="addAdmin()">Confirm</button>
-                    </div>
-
+                <div class="card">
+                    <h4>Total Employees</h4>
+                    <p id="totalEmployees">0</p>
                 </div>
-             </div>
-            <section id="admins" class="page">
-                <div class="table-box">
-                    <h3>Admins List</h3>
+                <div class="card">
+                    <h4>Total Students</h4>
+                    <p id="totalStudents">0</p>
+                </div>
+                <div class="card">
+                    <h4>Notifications</h4>
+                    <p id="totalNotifications">0</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ADMINS -->
+        <div id="addAdminModal" class="modal">
+
+            <div class="modal-content">
+                <h3 class="modal-title">Add New Admin</h3>
+
+                <div class="input-group">
+                    <input type="text" id="adminName" required>
+                    <label for="adminName">Admin Name</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="email" id="adminEmail" required>
+                    <label for="adminEmail">Admin Email</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="adminPhone" required>
+                    <label for="adminPhone">Admin Phone</label>
+                </div>
+                <p id="errorMsg" style="color: red;"></p>
+                <div class="modal-actions">
+                    <button class="btn-cancel" onclick="closeAddAdmin()">Cancel</button>
+                    <button class="btn-confirm" onclick="addAdmin()">Confirm</button>
+                </div>
+
+            </div>
+        </div>
+        <section id="admins" class="page">
+            <div class="table-box">
+                <h3>Admins List</h3>
                 <button class="addUser" id="add-admin"><i class="fa-solid fa-user-plus"></i>Add Admin</button>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Admin ID</th>
-                                <th>Email</th>
-                                <th>Phone Number</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="adminsTableBody">
-                            <tr>
-                                <td colspan="4">Loading admins...</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-            <!-- SUPER USERS -->
-            <!-- <section id="superUser" class="page active">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Admin ID</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminsTableBody">
+                        <tr>
+                            <td colspan="4">Loading admins...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <!-- SUPER USERS -->
+        <!-- <section id="superUser" class="page active">
             <div class="table-box">
                 <h3>Super User(s) list</h3>
                 <table>
@@ -125,63 +125,106 @@
             </div>
         </section> -->
 
-            <!-- TEACHERS -->
-            <section id="teachers" class="page">
-                <div class="table-box">
-                    <h3>Teachers List</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Employee ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="teachersTableBody">
-                            <tr>
-                                <td colspan="5">Loading Teachers...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <!-- TEACHERS -->
+        <div id="editEmployeeModal" class="modal">
+
+            <div class="modal-content">
+                <h3 class="modal-title">Edit Employee</h3>
+
+                <div class="input-group">
+                    <input type="text" id="employeeName" required>
+                    <label for="employeeName">Employee Name</label>
                 </div>
-            </section>
 
-            <!-- STUDENTS -->
-            <section id="students" class="page">
-                <div class="table-box">
-                    <h3>Students List</h3>
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Student ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-
-                        <tbody id="studentsTableBody">
-                            <tr>
-                                <td colspan="5">Loading students...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="input-group">
+                    <input type="email" id="employeeEmail" required>
+                    <label for="employeeEmail">Employee Email</label>
                 </div>
-            </section>
 
-            <!-- NOTIFICATIONS -->
-            <section id="notifications" class="page">
-                <h3>Notifications</h3>
-                <p>No new notifications</p>
-            </section>
-
+                <div class="input-group">
+                    <input type="text" id="employeePhone" required>
+                    <label for="employeePhone">Employee Phone</label>
+                </div>
+                <div class="select-group">
+                    <select name="StudentClass" id="std-class">
+                        <option value="">Assign Class</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
+                <p id="empError" style="color: red;"></p>
+                <div class="modal-actions">
+                    <button class="btn-cancel" onclick="closeEditEmployee()">Cancel</button>
+                    <button class="btn-confirm" onclick="editEmployee()">Confirm</button>
+                </div>
+            </div>
         </div>
-        <script src="../footer/footer.js"></script>
-        <script src="script.js"></script>
-    </body>
+        <section id="teachers" class="page">
+            <div class="table-box">
+                <h3>Teachers List</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Employee ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="teachersTableBody">
+                        <tr>
+                            <td colspan="5">Loading Teachers...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- STUDENTS -->
+        <section id="students" class="page">
+            <div class="table-box">
+                <h3>Students List</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="studentsTableBody">
+                        <tr>
+                            <td colspan="5">Loading students...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- NOTIFICATIONS -->
+        <section id="notifications" class="page">
+            <h3>Notifications</h3>
+            <p>No new notifications</p>
+        </section>
+
+    </div>
+    <script src="../footer/footer.js"></script>
+    <script src="script.js"></script>
+</body>
 
 </html>

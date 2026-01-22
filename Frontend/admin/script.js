@@ -92,7 +92,7 @@ async function loadAdmins() {
         <td>${admin.email}</td>
         <td>${admin.phone}</td>
         <td>
-          <button class="edit">Edit</button>
+          <button class="editAdmin">Edit</button>
           <button class="deleteAdmin" data-id=${admin.id}>Delete</button>
         </td>
       `;
@@ -201,7 +201,7 @@ const loadTeachers = async () => {
         <td>${employee.email}</td>
         <td>${employee.phone}</td>
         <td>
-          <button class="edit">Edit</button>
+          <button class="editEmp" data-id=${employee.id}>Edit</button>
           <button class="deleteEmp" data-id=${employee.id}>Delete</button>
         </td>
       `;
@@ -363,3 +363,75 @@ async function addAdmin() {
     console.error(err);
   }
 }
+
+let currentEmpID = null;
+const employeeModal = document.getElementById('editEmployeeModal');
+document.getElementById('teachersTableBody').addEventListener('click', (e) => {
+  if(e.target.classList.contains('editEmp')) {
+    currentEmpID = e.target.dataset.id;
+    employeeModal.classList.add('active');
+    document.body.classList.add('modal-open');
+  }
+  console.log("Editing Employee : ", e.target.dataset.id);
+})
+
+function closeEditEmployee() {
+  employeeModal.classList.remove("active");
+  document.body.classList.remove("modal-open");
+
+  // Clear all input fields
+  document.getElementById("employeeName").value = "";
+  document.getElementById("employeePhone").value = "";
+  document.getElementById("employeeEmail").value = "";
+}
+
+// Edit Employee
+async function editEmployee() {
+  const name = document.getElementById('employeeName').value;
+  const email = document.getElementById('employeeEmail').value;
+  const phone = document.getElementById('employeePhone').value;
+  const assignedClass = document.getElementById('std-class').value;
+  const errorMsg = document.getElementById('empError');
+
+  if(!name && !email && !phone && !assignedClass) {
+    errorMsg.innerText = 'Fill atleast one field';
+    setTimeout(() => {
+      errorMsg.innerText = '';
+    }, 1500);
+    return;
+  }
+
+  try {
+    const response = await fetch(`http://localhost:3000/management/editEmployee/${currentEmpID}`, {
+      method : "PUT",
+      headers : {
+        'Content-Type' : 'application/json'
+      },
+      body : JSON.stringify({ name, email, phone, assignedClass })
+    });
+
+    if (!response.ok) {
+  throw new Error(`Server error ${response.status}`);
+}
+
+    const result = await response.json();
+
+    if(!result.success) {
+      errorMsg.innerText = result.message;
+      setTimeout(() => {
+        errorMsg.innerText = '';
+      }, 1500);
+      return;
+    }
+
+    errorMsg.style.color = 'green';
+    errorMsg.innerText = 'Employee edited successfully';
+    setTimeout(() => {
+      errorMsg.innerText = '';
+    }, 1500);
+    loadTeachers();
+  } catch (err) {
+    console.error("Error : ", err);
+  }
+}
+

@@ -142,7 +142,7 @@
   position: absolute;
   top: 8px;
   right: 25px;
-  width: 110px;
+  width: 130px;
   height: 40px;
   border: none;
   border-radius: 6px;
@@ -181,7 +181,8 @@ tbody tr:hover{
   background: hsl(0, 0%, 82%);
 }
 
-.edit,
+.editAdmin,
+.editEmp,
 .deleteAdmin,
 .deleteEmp,
 .deleteStd {
@@ -193,19 +194,22 @@ tbody tr:hover{
   transition: background 0.25s ease, color 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease;
 }
 
-.edit {
+.editEmp,
+.editAdmin {
   background: #e0f2fe;
   color: #0369a1;
 }
 
-.edit:hover {
+.editEmp:hover,
+.editAdmin:hover {
   background: #0284c7;
   color: #ffffff;
   transform: translateY(-1px);
   box-shadow: 0 6px 14px rgba(2, 132, 199, 0.35);
 }
 
-.edit:active {
+.editEmp:active
+.editAdmin:active {
   transform: translateY(0);
   box-shadow: none;
 }
@@ -230,6 +234,16 @@ tbody tr:hover{
 .deleteStd:active {
   transform: translateY(0);
   box-shadow: none;
+}
+
+.select-group {
+  position: relative;
+}
+
+.select-group select {
+  width: 250px;
+  height: 40px;
+  border-radius: 8px;
 }
 
 .page {
